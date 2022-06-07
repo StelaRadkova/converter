@@ -1,0 +1,38 @@
+function attachEventsListeners() {
+let dayBtn = document.getElementById("daysBtn");
+let hourBtn = document.getElementById("hoursBtn");
+let minuteBtn = document.getElementById("minutesBtn");
+let secondBtn = document.getElementById("secondsBtn");
+let days = document.getElementById("days");
+let hours = document.getElementById("hours");
+let minutes = document.getElementById("minutes");
+let seconds = document.getElementById("seconds");
+dayBtn.addEventListener('click', convert);
+hourBtn.addEventListener('click', convert);
+minuteBtn.addEventListener('click', convert);
+secondBtn.addEventListener('click', convert);
+let ratio = {
+    days: 1,
+    hours: 24,
+    minutes: 1440,
+    seconds: 86400
+}
+function onConvert(value, unit){
+let days = value / ratio[unit];
+return {
+    days: days,
+    hours: days * ratio.hours,
+    minutes: days * ratio.minutes,
+    seconds: days * ratio.seconds
+}
+}
+function convert(ev){
+    let input = ev.target.parentElement.querySelector('input[type="text"]');
+    let time = onConvert(Number(input.value), input.id);
+    days.value = time.days;
+    hours.value = time.hours;
+    minutes.value = time.minutes;
+    seconds.value = time.seconds;
+
+}
+}
